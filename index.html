@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="preload" href="acorn.woff" as="font" type="font/woff" crossorigin />
+    <link rel="preload" href="gt.woff" as="font" type="font/woff" crossorigin />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Usama Zia - Developer & Designer</title>
+    <meta name="description"
+        content="Usama Zia is a passionate developer and designer crafting digital experiences with modern web technologies. Explore projects, skills, and get in touch!" />
+    <meta name="keywords"
+        content="Usama Zia, web developer, designer, portfolio, HTML, CSS, JavaScript, React, Node.js, Islamabad, Pakistan" />
+    <meta name="author" content="Usama Zia" />
+    <link rel="canonical" href="https://musamaziaa.github.io/portfolio/" />
+    <meta property="og:title" content="Usama Zia - Developer & Designer" />
+    <meta property="og:description"
+        content="Crafting digital experiences with passion and precision. Explore my portfolio, skills, and projects." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://musamaziaa.github.io/portfolio/" />
+    <meta property="og:image" content="https://musamaziaa.github.io/portfolio/nav.png" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Usama Zia - Developer & Designer" />
+    <meta name="twitter:description"
+        content="Crafting digital experiences with passion and precision. Explore my portfolio, skills, and projects." />
+    <meta name="twitter:image" content="https://musamaziaa.github.io/portfolio/nav.png" />
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+    <link rel="robots" href="/robots.txt" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Usama Zia",
+      "url": "https://musamaziaa.github.io/portfolio/",
+      "image": "https://musamaziaa.github.io/portfolio/nav.png",
+      "sameAs": [
+        "https://github.com/musamaziaa",
+        "https://www.instagram.com/cant_think123_"
+      ],
+      "jobTitle": "Web Developer & Designer",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Islamabad",
+        "addressCountry": "Pakistan"
+      }
+    }
+    </script>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preload" href="pre.gif" as="gif">
+    <link rel="shortcut icon" href="nav.png" type="image/x-icon">
+</head>
+
+<body>
+    <div class="tunnel-wrapper">
+        <div class="tunnel"></div>
+    </div>
+
+    <!-- Navigation -->
+    <header>
+        <nav class="nav animate__animated animate__fadeIn animate__delay-3s">
+            <div class="nav-brand">
+                <img src="nav.png" alt="Logo" class="nav-logo">
+                <span class="nav-name">Usama</span>
+            </div>
+            <div class="nav-links">
+                <a class="nav-link" href="#home">Home</a>
+                <a class="nav-link" href="#about">About</a>
+                <a class="nav-link" href="#skills">Skills</a>
+                <a class="nav-link" href="#projects">Projects</a>
+                <a class="nav-link" href="#contact">Contact</a>
+            </div>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="hi animate__animated animate__fadeIn">
+                I'm Usama.
+            </h1>
+            <h2 class="a animate__animated animate__fadeIn">
+                A <span class="typing-text">Developer</span>.
+            </h2>
+            <p class="hero-subtitle animate__animated animate__fadeIn">
+                Crafting digital experiences with passion, and precision.
+            </p>
+            <div class="hero-buttons animate__animated animate__fadeIn">
+                <button class="btn btn-primary" onclick="window.portfolioUtils.scrollToElement('projects', 80)">View My
+                    Work</button>
+                <button class="btn btn-secondary" onclick="window.portfolioUtils.scrollToElement('contact', 80)">Get In
+                    Touch</button>
+            </div>
+        </div>
+
+        <img class="star1" src="star.svg" alt="Decorative star graphic">
+        <img class="star2" src="star.svg" alt="Decorative star graphic">
+
+        <div class="scroll-indicator" onclick="window.portfolioUtils.scrollToElement('about', 80)">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2 class="section-title animate__animated animate__fadeIn">
+                About Me
+            </h2>
+
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="desc animate__animated animate__fadeIn">
+                        I enjoy creating cool stuff that's fun, simple for everyone to use, and makes users
+                        satisfied when they try it.
+                    </p>
+
+                    <p class="about-desc">
+                        I'm a passionate developer who loves turning ideas into reality through clean code and beautiful
+                        design.
+                        With expertise in modern web technologies, I create seamless digital experiences that not only
+                        look great
+                        but also perform exceptionally well.
+                    </p>
+
+                    <div class="about-stats">
+                        <div class="stat animate-stagger">
+                            <span class="stat-number" data-target="3">0</span>
+                            <span class="stat-label">Years Experience</span>
+                        </div>
+                        <div class="stat animate-stagger">
+                            <span class="stat-number" data-target="30">0</span>
+                            <span class="stat-label">Projects Completed</span>
+                        </div>
+                        <div class="stat animate-stagger">
+                            <span class="stat-number" data-target="94">0</span>
+                            <span class="stat-label">Client Satisfaction</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-image">
+                    <div class="image-placeholder">
+                        <img height="240px" width="auto" src="nav.png" alt="Usama Zia logo portrait">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills-section">
+        <div class="container">
+            <h2 class="section-title animate__animated animate__fadeIn">
+                Skills & Expertise
+            </h2>
+
+            <div class="skills-grid">
+                <div class="skill-category animate-stagger">
+                    <h3>Frontend</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <span class="skill-name">HTML5</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 97%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">CSS3</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 93%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">JavaScript</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 60%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">React</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 10%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category animate-stagger">
+                    <h3>Backend</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <span class="skill-name">Node.js</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 15%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Python</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 10%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">MongoDB</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width:1%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">SQL</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 1%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section">
+        <div class="container">
+            <h2 class="section-title animate__animated animate__fadeIn">
+                Featured Projects
+            </h2>
+
+            <div class="projects-grid">
+                <div class="project-card animate-stagger">
+                    <div class="project-image">
+                        <img src="mrgushii.png" alt="Screenshot of MrGushii's Portfolio website"
+                            style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:1;" />
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://mrgushii.github.io/portfolio/" target="_blank" class="project-link"><i
+                                        class="fas fa-external-link-alt"></i></a>
+                                <a href="https://github.com/mrgushii/portfolio" target="_blank" class="project-link"><i
+                                        class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>MrGushii's Portfolio</h3>
+                        <p>A simple yet visually appealing portfolio made for a friend of mines entirely from HTML, CSS
+                            and JS</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML 5</span>
+                            <span class="tech-tag">CSS 3</span>
+                            <span class="tech-tag">JS</span>
+                        </div>
+                        <div class="project-mobile-buttons">
+                            <a href="https://mrgushii.github.io/portfolio/" target="_blank"
+                                class="btn btn-primary mobile-project-btn">View Live</a>
+                            <a href="https://github.com/mrgushii/portfolio" target="_blank"
+                                class="btn btn-secondary mobile-project-btn">View GitHub repo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card animate-stagger">
+                    <div class="project-image">
+                        <img src="usama-portfolio-old.png" alt="Screenshot of Usama's old portfolio website"
+                            style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:1;" />
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://musamaziaa.github.io/portfolio-old/" class="project-link"><i
+                                        class="fas fa-external-link-alt"></i></a>
+                                <a href="https://musamaziaa.github.io/portfolio-old/" target="_blank"
+                                    class="project-link"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3><u>Usama's Portfolio (Old)</u></h3>
+                        <p>A portfolio made for myself in 2023, made with HTML, CSS and JS at the astonishingly young
+                            age of 11. This was my first ever project and I'm proud of it.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML 5</span>
+                            <span class="tech-tag">CSS 3</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                        <div class="project-mobile-buttons">
+                            <a href="https://musamaziaa.github.io/portfolio-old/"
+                                class="btn btn-primary mobile-project-btn">View Live</a>
+                            <a href="https://musamaziaa.github.io/portfolio-old/"
+                                class="btn btn-secondary mobile-project-btn">View Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card animate-stagger">
+                    <div class="project-image">
+                        <img src="ali-folio.png" alt="Screenshot of Ali's Flyer Portfolio website"
+                            style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:1;" />
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://musamaziaa.github.io/portfolio-oldsdufghduifhguilsfljkdfgljk"
+                                    class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                                <a href="https://musamaziaa.github.io/portfolio-oldsdufghduifhguilsfljkdfgljk"
+                                    class="project-link"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Ali's Flyer Portfolio</h3>
+                        <p>A simple flyer made for one of my early clients, made with HTML, CSS, JS, and lots of love!
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML 5</span>
+                            <span class="tech-tag">CSS 3</span>
+                            <span class="tech-tag">JS</span>
+                        </div>
+                        <div class="project-mobile-buttons">
+                            <a href="https://musamaziaa.github.io/ali-folio1"
+                                class="btn btn-primary mobile-project-btn">View Live</a>
+                            <a href="https://musamaziaa.github.io/ali-folio1 class=" btn btn-secondary
+                                mobile-project-btn">View Code</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title animate__animated animate__fadeIn">
+                Get In Touch
+            </h2>
+
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item animate-stagger">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p onclick="window.portfolioUtils.copyToClipboard('usama@example.com')"
+                                style="cursor: pointer;">usamamuslim.subhanallah@gmail.com</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item animate-stagger">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Phone</h4>
+                            <p onclick="window.portfolioUtils.copyToClipboard('+1 (555) 123-4567')"
+                                style="cursor: pointer;">+92 311 5050 626</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item animate-stagger">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Location</h4>
+                            <p>Islamabad, Pakistan</p>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="contact-form animate-stagger">
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Subject" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Your Message" rows="5" required></textarea>
+                    </div>
+                    <a href="mailto:usamamuslim.subhanallah@gmail.com" type="submit" target="_blank"
+                        class="btn btn-primary">Send
+                        Message</a>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="nav.png" alt="Logo" class="footer-logo">
+                    <span>Usama Zia</span>
+                </div>
+
+                <div class="social-links">
+                    <a href="#" class="social-link social-link-discord"><i class="fab fa-discord"></i><span
+                            class="discord-username">username: cant_think123</span></a>
+                    <a href="https://www.instagram.com/cant_think123_" target="_blank" class="social-link"><i
+                            class="fab fa-instagram"></i></a>
+                    <a href="https://github.com/musamaziaa" target="_blank" class="social-link"><i
+                            class="fab fa-github"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Usama Zia. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
+
+
+<!-- <button class="magic-btn">View My Magical Work</button> -->
