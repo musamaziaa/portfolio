@@ -24,18 +24,13 @@ class PortfolioWebsite {
         const preloader = document.getElementById('preloader');
 
         if (preloader) {
-            // Hide preloader after 3 seconds
             setTimeout(() => {
                 preloader.classList.add('fade-out');
-
-                // Remove preloader from DOM after fade out
-                setTimeout(() => {
+                preloader.addEventListener('transitionend', () => {
                     preloader.remove();
                     document.body.classList.add('page-loaded');
-
-                    // Trigger all animations after preloader is done
                     this.triggerPostPreloaderAnimations();
-                }, 500);
+                }, { once: true });
             }, 3000);
         }
     }

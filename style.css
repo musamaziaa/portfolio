@@ -1746,11 +1746,6 @@ small: #d5ede5 */
 
         @media (max-width: 450px) {
 
-          .tunnel-wrapper,
-          .tunnel {
-            /* Remove all overrides here, now handled globally */
-          }
-
           body {
             overflow-x: hidden !important;
             overflow-y: auto !important;
