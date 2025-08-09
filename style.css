@@ -903,10 +903,11 @@ small: #d5ede5 */
           background: rgba(143, 221, 195, 0.6);
           border-radius: 50%;
           animation: none;
+          opacity: 0;
         }
 
         body.page-loaded .particle {
-          animation: float 20s infinite linear;
+          animation: float 20s linear;
         }
 
         @keyframes float {
@@ -915,12 +916,20 @@ small: #d5ede5 */
             opacity: 0;
           }
 
-          10% {
+          5% {
+            opacity: 0.8;
+          }
+
+          15% {
             opacity: 1;
           }
 
-          90% {
+          85% {
             opacity: 1;
+          }
+
+          95% {
+            opacity: 0.6;
           }
 
           100% {
@@ -2537,35 +2546,90 @@ small: #d5ede5 */
           }
         }
 
-        /* Custom Cursor */
+        /* Beautiful Custom Cursor */
         .custom-cursor {
           position: fixed;
-          width: 20px;
-          height: 20px;
-          border: 2px solid rgba(255, 255, 255, 0.8);
+          width: 16px;
+          height: 16px;
+          background: linear-gradient(135deg, #ff6b9d 0%, #c44569 50%, #8b5cf6 100%);
+          border: 2px solid rgba(255, 255, 255, 0.9);
           border-radius: 50%;
           pointer-events: none;
-          z-index: 9999;
-          transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          z-index: 99999;
           transform: translate(-50%, -50%);
           opacity: 0;
-          mix-blend-mode: difference;
-        }
-
-        .custom-cursor.hover {
-          width: 40px;
-          height: 40px;
-          border-width: 1px;
-          background: rgba(143, 221, 195, 0.3);
+          transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          box-shadow:
+            0 0 20px rgba(255, 107, 157, 0.6),
+            0 0 40px rgba(139, 92, 246, 0.3),
+            inset 0 0 20px rgba(255, 255, 255, 0.2);
           backdrop-filter: blur(4px);
         }
 
-        .custom-cursor.hidden {
-          opacity: 0;
+        .custom-cursor::before {
+          content: '';
+          position: absolute;
+          top: -4px;
+          left: -4px;
+          right: -4px;
+          bottom: -4px;
+          border: 1px solid rgba(255, 107, 157, 0.4);
+          border-radius: 50%;
+          animation: cursorPulse 2s ease-in-out infinite;
+        }
+
+        .custom-cursor::after {
+          content: '';
+          position: absolute;
+          top: -8px;
+          left: -8px;
+          right: -8px;
+          bottom: -8px;
+          border: 1px solid rgba(139, 92, 246, 0.2);
+          border-radius: 50%;
+          animation: cursorOrbit 3s linear infinite;
+        }
+
+        .custom-cursor.hover {
+          width: 32px;
+          height: 32px;
+          background: linear-gradient(135deg, rgba(255, 107, 157, 0.9) 0%, rgba(196, 69, 105, 0.8) 50%, rgba(139, 92, 246, 0.8) 100%);
+          border-width: 3px;
+          border-color: rgba(255, 255, 255, 1);
+          box-shadow:
+            0 0 30px rgba(255, 107, 157, 0.8),
+            0 0 60px rgba(139, 92, 246, 0.4),
+            inset 0 0 30px rgba(255, 255, 255, 0.3);
+          transform: translate(-50%, -50%) scale(1.1);
         }
 
         .custom-cursor.visible {
           opacity: 1;
+        }
+
+        /* Cursor animations */
+        @keyframes cursorPulse {
+
+          0%,
+          100% {
+            transform: scale(1);
+            opacity: 0.4;
+          }
+
+          50% {
+            transform: scale(1.2);
+            opacity: 0.8;
+          }
+        }
+
+        @keyframes cursorOrbit {
+          0% {
+            transform: rotate(0deg);
+          }
+
+          100% {
+            transform: rotate(360deg);
+          }
         }
 
         /* Hide cursor on touch devices */

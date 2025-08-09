@@ -196,7 +196,7 @@ class PortfolioWebsite {
             return;
         }
 
-        // Create custom cursor element
+        // Create cursor element
         const cursor = document.createElement('div');
         cursor.className = 'custom-cursor';
         document.body.appendChild(cursor);
@@ -207,6 +207,8 @@ class PortfolioWebsite {
         let cursorX = 0;
         let cursorY = 0;
         let isVisible = false;
+        let isMoving = false;
+        let moveTimeout;
 
         // Mouse move handler
         const handleMouseMove = (e) => {
@@ -218,13 +220,25 @@ class PortfolioWebsite {
                 document.body.classList.add('custom-cursor-active');
                 isVisible = true;
             }
+
+            // Track movement for effects
+            if (!isMoving) {
+                isMoving = true;
+                cursor.style.transform = 'translate(-50%, -50%) scale(1.1)';
+            }
+
+            // Clear movement timeout
+            clearTimeout(moveTimeout);
+            moveTimeout = setTimeout(() => {
+                isMoving = false;
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+            }, 150);
         };
 
-        // Smooth cursor movement with easing
+        // Enhanced smooth cursor movement
         const updateCursor = () => {
-            // Much more responsive interpolation
-            cursorX += (mouseX - cursorX) * 0.9;
-            cursorY += (mouseY - cursorY) * 0.9;
+            cursorX += (mouseX - cursorX) * 0.8;
+            cursorY += (mouseY - cursorY) * 0.8;
 
             cursor.style.left = cursorX + 'px';
             cursor.style.top = cursorY + 'px';
@@ -232,17 +246,40 @@ class PortfolioWebsite {
             requestAnimationFrame(updateCursor);
         };
 
-        // Hover effects for interactive elements
-        const interactiveElements = document.querySelectorAll('a, button, .nav-link, .project-card, .social-link, .contact-item p[onclick], .scroll-indicator, .btn, .nav-toggle, .tech-tag');
+        // Enhanced hover effects for different element types
+        const interactiveElements = document.querySelectorAll('a, button, .nav-link, .project-card, .social-link, .contact-item p[onclick], .scroll-indicator, .btn, .nav-toggle, .tech-tag, .skill-item, .stat');
 
         interactiveElements.forEach(element => {
             element.addEventListener('mouseenter', () => {
                 cursor.classList.add('hover');
+
+                // Add specific effects based on element type
+                if (element.classList.contains('btn')) {
+                    cursor.style.background = 'linear-gradient(135deg, rgba(255, 107, 157, 1) 0%, rgba(139, 92, 246, 1) 100%)';
+                    cursor.style.boxShadow = '0 0 40px rgba(255, 107, 157, 1), 0 0 80px rgba(139, 92, 246, 0.6)';
+                } else if (element.classList.contains('project-card')) {
+                    cursor.style.background = 'linear-gradient(135deg, rgba(255, 107, 157, 0.9) 0%, rgba(196, 69, 105, 0.9) 50%, rgba(139, 92, 246, 0.7) 100%)';
+                } else if (element.classList.contains('nav-link')) {
+                    cursor.style.background = 'linear-gradient(135deg, rgba(255, 107, 157, 1) 0%, rgba(139, 92, 246, 0.8) 100%)';
+                }
             });
 
             element.addEventListener('mouseleave', () => {
                 cursor.classList.remove('hover');
+                cursor.style.background = '';
+                cursor.style.boxShadow = '';
             });
+        });
+
+        // Click effects
+        document.addEventListener('mousedown', () => {
+            cursor.style.transform = 'translate(-50%, -50%) scale(0.8)';
+            cursor.style.boxShadow = '0 0 50px rgba(255, 107, 157, 1)';
+        });
+
+        document.addEventListener('mouseup', () => {
+            cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+            cursor.style.boxShadow = '';
         });
 
         // Hide cursor when leaving window
@@ -250,6 +287,7 @@ class PortfolioWebsite {
             cursor.classList.remove('visible');
             document.body.classList.remove('custom-cursor-active');
             isVisible = false;
+            isMoving = false;
         });
 
         // Show cursor when entering window
@@ -581,29 +619,121 @@ class PortfolioWebsite {
         particleContainer.className = 'particle-container';
         document.body.appendChild(particleContainer);
 
+        let particleInterval;
+        let isPageVisible = true;
+        let maxParticles = 15; // Limit maximum particles
+
         const createParticle = () => {
-            // Only create particles if page is loaded
-            if (!document.body.classList.contains('page-loaded')) {
+            // Only create particles if page is loaded and visible
+            if (!document.body.classList.contains('page-loaded') || !isPageVisible) {
+                return;
+            }
+
+            // Check if we have too many particles
+            const existingParticles = particleContainer.querySelectorAll('.particle');
+            if (existingParticles.length >= maxParticles) {
                 return;
             }
 
             const particle = document.createElement('div');
             particle.className = 'particle';
 
-            // Random position
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 1 + 's';
+            // Enhanced randomization for better distribution
+            const randomX = Math.random() * 100;
+            const randomDelay = Math.random() * 3; // 0-3 seconds delay
+            const randomDuration = 15 + Math.random() * 10; // 15-25 seconds duration
+            const randomSize = 2 + Math.random() * 4; // 2-6px size
+
+            particle.style.left = randomX + '%';
+            particle.style.animationDelay = randomDelay + 's';
+            particle.style.animationDuration = randomDuration + 's';
+            particle.style.width = randomSize + 'px';
+            particle.style.height = randomSize + 'px';
 
             particleContainer.appendChild(particle);
+
+            // Remove particle after animation completes
+            setTimeout(() => {
+                if (particle.parentNode) {
+                    particle.remove();
+                }
+            }, (randomDelay + randomDuration) * 1000);
         };
 
-        // Create particles periodically
-        setInterval(createParticle, 1100); // Much more frequent particle creation
+        const startParticleSystem = () => {
+            // Clear any existing interval
+            if (particleInterval) {
+                clearInterval(particleInterval);
+            }
 
-        // Create initial particles
-        for (let i = 0; i < 2; i++) { // 5x more initial particles
-            setTimeout(createParticle, i * 500); // Faster initial spawn
+            // Clear existing particles
+            particleContainer.innerHTML = '';
+
+            // Create initial particles with staggered timing
+            for (let i = 0; i < 5; i++) {
+                setTimeout(createParticle, i * 200);
+            }
+
+            // Start periodic particle creation
+            particleInterval = setInterval(createParticle, 800 + Math.random() * 400); // 800-1200ms interval
+        };
+
+        const stopParticleSystem = () => {
+            if (particleInterval) {
+                clearInterval(particleInterval);
+                particleInterval = null;
+            }
+            // Clear all particles
+            particleContainer.innerHTML = '';
+        };
+
+        // Handle page visibility changes
+        const handleVisibilityChange = () => {
+            if (document.hidden) {
+                isPageVisible = false;
+                stopParticleSystem();
+            } else {
+                isPageVisible = true;
+                // Small delay to ensure page is fully loaded
+                setTimeout(() => {
+                    if (document.body.classList.contains('page-loaded')) {
+                        startParticleSystem();
+                    }
+                }, 100);
+            }
+        };
+
+        // Listen for page visibility changes
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+
+        // Clean up when page is unloaded
+        window.addEventListener('beforeunload', () => {
+            stopParticleSystem();
+            observer.disconnect();
+        });
+
+        // Start particle system when page is loaded
+        if (document.body.classList.contains('page-loaded')) {
+            startParticleSystem();
         }
+
+        // Also handle when page-loaded class is added
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' &&
+                    mutation.attributeName === 'class' &&
+                    mutation.target.classList.contains('page-loaded')) {
+                    if (isPageVisible) {
+                        startParticleSystem();
+                    }
+                }
+            });
+        });
+
+        observer.observe(document.body, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
     }
 
     setupScrollProgress() {
