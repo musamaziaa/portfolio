@@ -222,9 +222,9 @@ class PortfolioWebsite {
 
         // Smooth cursor movement with easing
         const updateCursor = () => {
-            // Smooth interpolation
-            cursorX += (mouseX - cursorX) * 0.15;
-            cursorY += (mouseY - cursorY) * 0.15;
+            // Much more responsive interpolation
+            cursorX += (mouseX - cursorX) * 0.9;
+            cursorY += (mouseY - cursorY) * 0.9;
 
             cursor.style.left = cursorX + 'px';
             cursor.style.top = cursorY + 'px';
