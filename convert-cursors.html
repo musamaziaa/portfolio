@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursor Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #302b63;
+            color: #8fddc3;
+        }
+        .output {
+            background: rgba(143, 221, 195, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border: 1px solid rgba(143, 221, 195, 0.3);
+        }
+        .cursor-preview {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #8fddc3;
+            border-radius: 50%;
+            margin: 10px;
+            display: inline-block;
+        }
+        button {
+            background: #8fddc3;
+            color: #302b63;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #d5ede5;
+        }
+    </style>
+</head>
+<body>
+    <h1>Custom Cursor Generator</h1>
+    
+    <div class="output">
+        <h3>Default Cursor (Small Circle)</h3>
+        <div class="cursor-preview" id="default-preview"></div>
+        <button onclick="convertDefault()">Convert Default Cursor</button>
+        <div id="default-output"></div>
+    </div>
+    
+    <div class="output">
+        <h3>Pointer Cursor (Large Circle)</h3>
+        <div class="cursor-preview" id="pointer-preview"></div>
+        <button onclick="convertPointer()">Convert Pointer Cursor</button>
+        <div id="pointer-output"></div>
+    </div>
+
+    <script>
+        // Default cursor SVG
+        const defaultSVG = `<svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="8" cy="8" r="3" fill="#8fddc3" opacity="0.8"/>
+  <circle cx="8" cy="8" r="2" fill="#d5ede5" opacity="0.9"/>
+</svg>`;
+
+        // Pointer cursor SVG
+        const pointerSVG = `<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="10" cy="10" r="5" fill="#8fddc3" opacity="0.9"/>
+  <circle cx="10" cy="10" r="3" fill="#d5ede5" opacity="1"/>
+  <circle cx="10" cy="10" r="1.5" fill="#302b63" opacity="0.8"/>
+</svg>`;
+
+        function convertDefault() {
+            const svgBlob = new Blob([defaultSVG], {type: 'image/svg+xml'});
+            const url = URL.createObjectURL(svgBlob);
+            
+            const dataURL = `data:image/svg+xml;base64,${btoa(defaultSVG)}`;
+            
+            document.getElementById('default-output').innerHTML = `
+                <h4>CSS Code:</h4>
+                <code style="background: rgba(0,0,0,0.3); padding: 10px; display: block; border-radius: 5px; margin: 10px 0;">
+cursor: url('data:image/svg+xml;base64,${btoa(defaultSVG)}') 8 8, auto;
+                </code>
+                <p><strong>Copy this CSS code to use the default cursor!</strong></p>
+            `;
+            
+            // Update preview
+            document.getElementById('default-preview').style.background = `url('${dataURL}') center/contain no-repeat`;
+        }
+
+        function convertPointer() {
+            const svgBlob = new Blob([pointerSVG], {type: 'image/svg+xml'});
+            const url = URL.createObjectURL(svgBlob);
+            
+            const dataURL = `data:image/svg+xml;base64,${btoa(pointerSVG)}`;
+            
+            document.getElementById('pointer-output').innerHTML = `
+                <h4>CSS Code:</h4>
+                <code style="background: rgba(0,0,0,0.3); padding: 10px; display: block; border-radius: 5px; margin: 10px 0;">
+cursor: url('data:image/svg+xml;base64,${btoa(pointerSVG)}') 10 10, pointer;
+                </code>
+                <p><strong>Copy this CSS code to use the pointer cursor!</strong></p>
+            `;
+            
+            // Update preview
+            document.getElementById('pointer-preview').style.background = `url('${dataURL}') center/contain no-repeat`;
+        }
+
+        // Auto-convert on load
+        window.onload = function() {
+            convertDefault();
+            convertPointer();
+        };
+    </script>
+</body>
+</html>

@@ -12,6 +12,7 @@ class PortfolioWebsite {
         this.setupSkillBars();
         this.setupProjectCards();
         this.setupContactForm();
+        this.setupCustomCursor();
         if (this.isDesktop()) {
             this.setupParallaxEffects();
             this.setupThemeToggle();
@@ -187,6 +188,88 @@ class PortfolioWebsite {
                 form.reset();
             });
         }
+    }
+
+    setupCustomCursor() {
+        // Only setup custom cursor on desktop devices
+        if (this.isTouchDevice()) {
+            return;
+        }
+
+        // Create custom cursor element
+        const cursor = document.createElement('div');
+        cursor.className = 'custom-cursor';
+        document.body.appendChild(cursor);
+
+        // Variables for smooth movement
+        let mouseX = 0;
+        let mouseY = 0;
+        let cursorX = 0;
+        let cursorY = 0;
+        let isVisible = false;
+
+        // Mouse move handler
+        const handleMouseMove = (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            if (!isVisible) {
+                cursor.classList.add('visible');
+                document.body.classList.add('custom-cursor-active');
+                isVisible = true;
+            }
+        };
+
+        // Smooth cursor movement with easing
+        const updateCursor = () => {
+            // Smooth interpolation
+            cursorX += (mouseX - cursorX) * 0.15;
+            cursorY += (mouseY - cursorY) * 0.15;
+
+            cursor.style.left = cursorX + 'px';
+            cursor.style.top = cursorY + 'px';
+
+            requestAnimationFrame(updateCursor);
+        };
+
+        // Hover effects for interactive elements
+        const interactiveElements = document.querySelectorAll('a, button, .nav-link, .project-card, .social-link, .contact-item p[onclick], .scroll-indicator, .btn, .nav-toggle, .tech-tag');
+
+        interactiveElements.forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                cursor.classList.add('hover');
+            });
+
+            element.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hover');
+            });
+        });
+
+        // Hide cursor when leaving window
+        document.addEventListener('mouseleave', () => {
+            cursor.classList.remove('visible');
+            document.body.classList.remove('custom-cursor-active');
+            isVisible = false;
+        });
+
+        // Show cursor when entering window
+        document.addEventListener('mouseenter', () => {
+            if (!this.isTouchDevice()) {
+                cursor.classList.add('visible');
+                document.body.classList.add('custom-cursor-active');
+                isVisible = true;
+            }
+        });
+
+        // Start the cursor animation
+        updateCursor();
+
+        // Add mouse move listener
+        document.addEventListener('mousemove', handleMouseMove);
+    }
+
+    isTouchDevice() {
+        return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     }
 
     setupParallaxEffects() {
@@ -514,56 +597,8 @@ class PortfolioWebsite {
             particleContainer.appendChild(particle);
         };
 
-        // Create cursor-following particles
-        const createCursorParticle = (x, y) => {
-            // Only create particles if page is loaded
-            if (!document.body.classList.contains('page-loaded')) {
-                return;
-            }
-
-            const particle = document.createElement('div');
-            particle.className = 'particle cursor-particle';
-
-            // Position at cursor location
-            particle.style.left = x + 'px';
-            particle.style.top = y + 'px';
-            particle.style.position = 'fixed';
-            particle.style.pointerEvents = 'none';
-            particle.style.zIndex = '9999';
-
-            // Random animation delay for variety
-            particle.style.animationDelay = Math.random() * 100 + 's';
-
-            particleContainer.appendChild(particle);
-
-            // Remove particle after 3 seconds
-            setTimeout(() => {
-                if (particle.parentNode) {
-                    particle.parentNode.removeChild(particle);
-                }
-            }, 2000);
-        };
-
-        // Track mouse movement and create particles
-        let mouseX = 0, mouseY = 0;
-        let lastParticleTime = 0;
-        const particleInterval = 20; // Create particle every 50ms while moving
-
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-
-            const currentTime = Date.now();
-
-            // Create particle every 50ms while mouse is moving
-            if (currentTime - lastParticleTime >= particleInterval) {
-                createCursorParticle(mouseX, mouseY);
-                lastParticleTime = currentTime;
-            }
-        });
-
         // Create particles periodically
-        setInterval(createParticle, 900); // Much more frequent particle creation
+        setInterval(createParticle, 1100); // Much more frequent particle creation
 
         // Create initial particles
         for (let i = 0; i < 2; i++) { // 5x more initial particles
