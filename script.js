@@ -25,6 +25,7 @@ class PortfolioWebsite {
         const preloader = document.getElementById('preloader');
 
         if (preloader) {
+            // Let the ultimate loader run for 3 seconds, then fade out
             setTimeout(() => {
                 preloader.classList.add('fade-out');
                 preloader.addEventListener('transitionend', () => {
@@ -224,7 +225,7 @@ class PortfolioWebsite {
             // Track movement for effects
             if (!isMoving) {
                 isMoving = true;
-                cursor.style.transform = 'translate(-50%, -50%) scale(1.1)';
+                cursor.style.transform = 'translate(-50%, -50%) scale(1.05)';
             }
 
             // Clear movement timeout
@@ -232,13 +233,15 @@ class PortfolioWebsite {
             moveTimeout = setTimeout(() => {
                 isMoving = false;
                 cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-            }, 150);
+            }, 100);
         };
 
-        // Enhanced smooth cursor movement
+        // Enhanced responsive cursor movement
         const updateCursor = () => {
-            cursorX += (mouseX - cursorX) * 0.8;
-            cursorY += (mouseY - cursorY) * 0.8;
+
+            // More responsive movement with less lag
+            cursorX += (mouseX - cursorX) * 0.3;
+            cursorY += (mouseY - cursorY) * 0.3;
 
             cursor.style.left = cursorX + 'px';
             cursor.style.top = cursorY + 'px';
@@ -273,8 +276,8 @@ class PortfolioWebsite {
 
         // Click effects
         document.addEventListener('mousedown', () => {
-            cursor.style.transform = 'translate(-50%, -50%) scale(0.8)';
-            cursor.style.boxShadow = '0 0 50px rgba(255, 107, 157, 1)';
+            cursor.style.transform = 'translate(-50%, -50%) scale(0.9)';
+            cursor.style.boxShadow = '0 0 30px rgba(255, 107, 157, 0.8)';
         });
 
         document.addEventListener('mouseup', () => {
