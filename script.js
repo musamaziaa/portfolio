@@ -810,21 +810,147 @@ class PortfolioWebsite {
         // Add page-loaded class to body for CSS animations
         document.body.classList.add('page-loaded');
 
-        // Trigger hero animations
+        // Enhanced hero animations with staggered timing
         const heroElements = document.querySelectorAll('.hero-content > *');
         heroElements.forEach((element, index) => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+            element.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+
             setTimeout(() => {
-                element.classList.add('animate__fadeIn');
-            }, index * 200);
+                element.style.opacity = '1';
+                element.style.transform = 'translateY(0)';
+            }, 500 + (index * 150));
         });
 
-        // Trigger section animations
+        // Enhanced navigation animation
+        const header = document.querySelector('header');
+        if (header) {
+            header.style.opacity = '0';
+            header.style.transform = 'translateY(-20px)';
+            header.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+
+            setTimeout(() => {
+                header.style.opacity = '1';
+                header.style.transform = 'translateY(0)';
+            }, 300);
+        }
+
+        // Enhanced section animations with smooth reveals
         const sections = document.querySelectorAll('section');
         sections.forEach((section, index) => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(50px)';
+            section.style.transition = 'all 1s cubic-bezier(0.4, 0, 0.2, 1)';
+
             setTimeout(() => {
-                section.classList.add('animate__fadeIn');
-            }, (index + 1) * 300);
+                section.style.opacity = '1';
+                section.style.transform = 'translateY(0)';
+            }, 800 + (index * 200));
         });
+
+        // Animate stars with delay
+        const stars = document.querySelectorAll('.star1, .star2');
+        stars.forEach((star, index) => {
+            star.style.opacity = '0';
+            star.style.transform = 'scale(0.8) rotate(180deg)';
+            star.style.transition = 'all 1.2s cubic-bezier(0.4, 0, 0.2, 1)';
+
+            setTimeout(() => {
+                star.style.opacity = '1';
+                star.style.transform = 'scale(1) rotate(0deg)';
+            }, 1200 + (index * 300));
+        });
+
+        // Animate scroll indicator
+        const scrollIndicator = document.querySelector('.scroll-indicator');
+        if (scrollIndicator) {
+            scrollIndicator.style.opacity = '0';
+            scrollIndicator.style.transform = 'translateY(20px)';
+            scrollIndicator.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+
+            setTimeout(() => {
+                scrollIndicator.style.opacity = '1';
+                scrollIndicator.style.transform = 'translateY(0)';
+            }, 1500);
+        }
+
+        // Animate buttons with bounce effect
+        const buttons = document.querySelectorAll('.btn');
+        buttons.forEach((button, index) => {
+            button.style.opacity = '0';
+            button.style.transform = 'scale(0.8) translateY(20px)';
+            button.style.transition = 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
+
+            setTimeout(() => {
+                button.style.opacity = '1';
+                button.style.transform = 'scale(1) translateY(0)';
+            }, 1000 + (index * 100));
+        });
+
+        // Animate project cards with staggered reveal
+        const projectCards = document.querySelectorAll('.project-card');
+        projectCards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(40px) scale(0.95)';
+            card.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0) scale(1)';
+            }, 1400 + (index * 150));
+        });
+
+        // Animate skill bars with progress reveal
+        const skillBars = document.querySelectorAll('.skill-progress');
+        skillBars.forEach((bar, index) => {
+            const originalWidth = bar.style.width;
+            bar.style.width = '0%';
+            bar.style.transition = 'width 1.5s cubic-bezier(0.4, 0, 0.2, 1)';
+
+            setTimeout(() => {
+                bar.style.width = originalWidth;
+            }, 2000 + (index * 100));
+        });
+
+        // Animate stats with counting effect
+        const stats = document.querySelectorAll('.stat');
+        stats.forEach((stat, index) => {
+            stat.style.opacity = '0';
+            stat.style.transform = 'scale(0.8)';
+            stat.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+
+            setTimeout(() => {
+                stat.style.opacity = '1';
+                stat.style.transform = 'scale(1)';
+            }, 1800 + (index * 150));
+        });
+
+        // Animate contact items
+        const contactItems = document.querySelectorAll('.contact-item');
+        contactItems.forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateX(-30px)';
+            item.style.transition = 'all 0.7s cubic-bezier(0.4, 0, 0.2, 1)';
+
+            setTimeout(() => {
+                item.style.opacity = '1';
+                item.style.transform = 'translateX(0)';
+            }, 1600 + (index * 100));
+        });
+
+        // Animate footer with fade up
+        const footer = document.querySelector('footer');
+        if (footer) {
+            footer.style.opacity = '0';
+            footer.style.transform = 'translateY(30px)';
+            footer.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+
+            setTimeout(() => {
+                footer.style.opacity = '1';
+                footer.style.transform = 'translateY(0)';
+            }, 2200);
+        }
     }
 
     showNotification(message, type = 'info') {
