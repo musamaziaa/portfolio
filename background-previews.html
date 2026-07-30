@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Previews</title>
+    <style>
+        :root {
+            --mint: #8fddc3;
+            --purple: #302b63;
+            --purple-deep: #1a1a2e;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: var(--purple-deep);
+            color: #fff;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        #bg-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(48, 43, 99, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(143, 221, 195, 0.3);
+            z-index: 10;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            background: transparent;
+            color: var(--mint);
+            border: 1px solid var(--mint);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn.active, .btn:hover {
+            background: var(--mint);
+            color: var(--purple);
+        }
+
+        .overlay-text {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 5;
+            font-size: 3rem;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.8);
+            pointer-events: none;
+            text-align: center;
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 1. Spinning Tunnel */
+        .bg-tunnel {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-radial-gradient(
+                circle at center,
+                var(--purple-deep) 0,
+                var(--purple) 40px,
+                var(--mint) 42px,
+                var(--purple) 44px
+            );
+            animation: spin 60s linear infinite;
+            opacity: 0.4;
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+
+        /* 2. Starfield Constellation */
+        .bg-starfield {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #000;
+        }
+
+        /* 3. Aurora Blobs */
+        .bg-aurora {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--purple-deep);
+            filter: blur(60px);
+        }
+        .aurora-blob {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: floatBlob 10s ease-in-out infinite alternate;
+        }
+        .aurora-1 { width: 500px; height: 500px; background: #8fddc3; top: -100px; left: -100px; }
+        .aurora-2 { width: 600px; height: 400px; background: #59d4ff; bottom: -100px; right: -100px; animation-delay: -3s; }
+        .aurora-3 { width: 400px; height: 600px; background: rgba(255, 107, 157, 0.6); top: 30%; left: 40%; animation-delay: -6s; }
+
+        @keyframes floatBlob {
+            100% { transform: translate(50px, 50px) scale(1.1); }
+        }
+
+        /* 4. Dot Grid Glow */
+        .bg-dots {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(var(--mint) 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.3;
+        }
+        .glow-cursor {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(143,221,195,0.4) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: top 0.1s, left 0.1s;
+        }
+
+        /* 5. Noise Texture */
+        .bg-noise {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 0%, #000 120%), var(--purple-deep);
+        }
+        .bg-noise::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.15"/%3E%3C/svg%3E');
+            pointer-events: none;
+        }
+
+        /* 6. Mouse Reactive Particles */
+        .bg-interactive {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--purple-deep);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="bg-container"></div>
+    <div class="overlay-text" id="preview-title">Choose a Background</div>
+
+    <div class="controls">
+        <button class="btn" onclick="setBg('tunnel')">1. Spinning Tunnel</button>
+        <button class="btn" onclick="setBg('starfield')">2. Starfield</button>
+        <button class="btn" onclick="setBg('aurora')">3. Aurora Blobs</button>
+        <button class="btn" onclick="setBg('dots')">4. Dot Grid</button>
+        <button class="btn" onclick="setBg('noise')">5. Noise + Vignette</button>
+        <button class="btn" onclick="setBg('interactive')">6. Interactive Particles</button>
+    </div>
+
+    <script>
+        const container = document.getElementById('bg-container');
+        const title = document.getElementById('preview-title');
+        let animationFrameId;
+
+        function clearBg() {
+            container.innerHTML = '';
+            container.className = '';
+            document.removeEventListener('mousemove', handleDotsGlow);
+            if (window.interactiveCanvasContext) {
+                cancelAnimationFrame(window.interactiveCanvasContext);
+            }
+            document.querySelectorAll('.btn').forEach(b => b.classList.remove('active'));
+        }
+
+        function setBg(type) {
+            clearBg();
+            const btn = document.querySelector(`button[onclick="setBg('${type}')"]`);
+            if (btn) btn.classList.add('active');
+
+            if (type === 'tunnel') {
+                title.innerText = 'Spinning Tunnel';
+                container.innerHTML = '<div class="bg-tunnel"></div>';
+            } else if (type === 'starfield') {
+                title.innerText = 'Starfield Constellation';
+                container.innerHTML = '<canvas id="star-canvas" class="bg-starfield"></canvas>';
+                initStarfield();
+            } else if (type === 'aurora') {
+                title.innerText = 'Aurora Blobs';
+                container.innerHTML = `
+                    <div class="bg-aurora">
+                        <div class="aurora-blob aurora-1"></div>
+                        <div class="aurora-blob aurora-2"></div>
+                        <div class="aurora-blob aurora-3"></div>
+                    </div>
+                `;
+            } else if (type === 'dots') {
+                title.innerText = 'Dot Grid + Glow';
+                container.innerHTML = `
+                    <div class="bg-dots"></div>
+                    <div class="glow-cursor" id="glow-cursor"></div>
+                `;
+                document.addEventListener('mousemove', handleDotsGlow);
+            } else if (type === 'noise') {
+                title.innerText = 'Noise + Vignette';
+                container.innerHTML = '<div class="bg-noise"></div>';
+            } else if (type === 'interactive') {
+                title.innerText = 'Mouse Reactive Particles';
+                container.innerHTML = '<canvas id="interactive-canvas" class="bg-interactive"></canvas>';
+                initInteractiveParticles();
+            }
+        }
+
+        // Dot Glow Logic
+        function handleDotsGlow(e) {
+            const cursor = document.getElementById('glow-cursor');
+            if (cursor) {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            }
+        }
+
+        // Starfield Constellation Logic
+        function initStarfield() {
+            const canvas = document.getElementById('star-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const particles = [];
+            for (let i = 0; i < 100; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5,
+                    radius: Math.random() * 2
+                });
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#8fddc3';
+                ctx.strokeStyle = 'rgba(143, 221, 195, 0.15)';
+
+                for (let i = 0; i < particles.length; i++) {
+                    const p = particles[i];
+                    p.x += p.vx; p.y += p.vy;
+
+                    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const p2 = particles[j];
+                        const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+                        if (dist < 100) {
+                            ctx.beginPath();
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+                window.interactiveCanvasContext = requestAnimationFrame(draw);
+            }
+            draw();
+        }
+
+        // Interactive Particles Logic
+        function initInteractiveParticles() {
+            const canvas = document.getElementById('interactive-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const particles = [];
+            for (let i = 0; i < 150; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    baseX: Math.random() * canvas.width,
+                    baseY: Math.random() * canvas.height,
+                    density: (Math.random() * 30) + 1,
+                    radius: Math.random() * 3 + 1
+                });
+            }
+
+            let mouse = { x: null, y: null, radius: 100 };
+            window.addEventListener('mousemove', (e) => {
+                mouse.x = e.x;
+                mouse.y = e.y;
+            });
+
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#8fddc3';
+
+                for (let i = 0; i < particles.length; i++) {
+                    let p = particles[i];
+                    let dx = mouse.x - p.x;
+                    let dy = mouse.y - p.y;
+                    let distance = Math.hypot(dx, dy);
+                    let forceDirectionX = dx / distance;
+                    let forceDirectionY = dy / distance;
+                    let maxDistance = mouse.radius;
+                    let force = (maxDistance - distance) / maxDistance;
+                    let directionX = forceDirectionX * force * p.density;
+                    let directionY = forceDirectionY * force * p.density;
+
+                    if (distance < mouse.radius) {
+                        p.x -= directionX;
+                        p.y -= directionY;
+                    } else {
+                        if (p.x !== p.baseX) {
+                            let dx = p.x - p.baseX;
+                            p.x -= dx / 10;
+                        }
+                        if (p.y !== p.baseY) {
+                            let dy = p.y - p.baseY;
+                            p.y -= dy / 10;
+                        }
+                    }
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                window.interactiveCanvasContext = requestAnimationFrame(draw);
+            }
+            draw();
+        }
+
+        // Initialize with default
+        setBg('tunnel');
+    </script>
+</body>
+</html>

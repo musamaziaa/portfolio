@@ -1,0 +1,53 @@
+{
+    "name": "usama-zia-portfolio",
+    "version": "1.0.0",
+    "description": "A modern, interactive portfolio website showcasing Usama Zia's development and design work with advanced animations and responsive design.",
+    "main": "index.html",
+    "scripts": {
+        "start": "python -m http.server 8000",
+        "serve": "npx serve .",
+        "dev": "python -m http.server 8000"
+    },
+    "keywords": [
+        "portfolio",
+        "web-developer",
+        "designer",
+        "html5",
+        "css3",
+        "javascript",
+        "responsive-design",
+        "animations",
+        "parallax",
+        "interactive",
+        "modern-web",
+        "frontend",
+        "usama-zia",
+        "islamabad",
+        "pakistan"
+    ],
+    "author": {
+        "name": "Usama Zia",
+        "email": "usamamuslim.subhanallah@gmail.com",
+        "url": "https://musamaziaa.github.io/portfolio/"
+    },
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/musamaziaa/portfolio.git"
+    },
+    "homepage": "https://musamaziaa.github.io/portfolio/",
+    "bugs": {
+        "url": "https://github.com/musamaziaa/portfolio/issues"
+    },
+    "engines": {
+        "node": ">=14.0.0"
+    },
+    "devDependencies": {},
+    "dependencies": {},
+    "browserslist": [
+        "> 1%",
+        "last 2 versions",
+        "not dead"
+    ],
+    "private": true
+}
