@@ -438,7 +438,7 @@ class Portfolio {
       // Star parallax
       stars.forEach((star, i) => {
         const speed = 0.4 + i * 0.2;
-        star.style.transform = `translateY(${y * speed}px) rotate(${y * 0.08}deg)`;
+        star.style.transform = `translateY(${y * speed}px)`;
       });
 
       // Subtle vertical parallax for the whole hero content

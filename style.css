@@ -418,14 +418,20 @@ body.loaded .window-body pre {
 /* Stars */
 .hero-star {
   position: absolute; z-index: 2;
-  width: clamp(2rem, 4vw, 3.2rem);
-  filter: drop-shadow(0 0 8px var(--mint-glow));
-  opacity: 0; transform: scale(0.5) rotate(180deg);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  color: var(--mint);
+  text-shadow: 0 0 12px var(--mint-glow), 0 0 24px var(--mint);
+  opacity: 0; transform: scale(0.5);
   transition: opacity 1s var(--ease), transform 1s var(--ease);
 }
-body.loaded .hero-star { opacity: 1; transform: scale(1) rotate(0deg); }
-.hero-star-1 { top: 18%; left: 6%; animation: twinkle 3.5s ease-in-out infinite; }
-.hero-star-2 { bottom: 15%; right: 8%; animation: twinkle 3.5s ease-in-out infinite 1.5s; }
+body.loaded .hero-star { opacity: 1; transform: scale(1); }
+.hero-star-1 { top: 18%; left: 6%; animation: pulse-shine 3.5s ease-in-out infinite; }
+.hero-star-2 { bottom: 15%; right: 8%; animation: pulse-shine 3.5s ease-in-out infinite 1.5s; }
+
+@keyframes pulse-shine {
+  0%, 100% { opacity: 0.6; transform: scale(0.95); filter: drop-shadow(0 0 8px var(--mint-glow)); }
+  50% { opacity: 1; transform: scale(1.05); filter: drop-shadow(0 0 20px var(--mint)); }
+}
 
 /* Scroll indicator */
 .scroll-indicator {
